@@ -45,7 +45,6 @@ def criar_table():
 
     cursor.execute(criar_table)
     cursor.close()
-<<<<<<< Updated upstream
     conexao.close()
 
 def cadastrar_aluno():
@@ -93,30 +92,37 @@ def menu():
  
         if opcao == "1":
             cadastrar_aluno()
+
         elif opcao == "2":
             listar_aluno()
+
         elif opcao == "3":
             remover_aluno()
+
         elif opcao == "4":
             editar_dados()
+
         elif opcao == "5":
             adicionar_notas()
+
         elif opcao == "6":
             remover_notas()
+
         elif opcao == "7":
             caucular_media()
+
         elif opcao == "8":
             situção_aluno()
+
         elif opcao == "9":
             buscar_aluno()
+
         elif opcao == "0":
-            print("você saiu do Sistema da escola sepa prime")
+            print("você saiu do Sistema do Instituto D'Souza")
             break
+
         else:
             print("Opção inválida!")
 
-print("Bem vindo ao sistema da escola Instituto D'Souza")
+print("Bem vindo ao sistema do Instituto D'Souza")
 menu()
-=======
-    conexao.close()    
->>>>>>> Stashed changes
