@@ -17,10 +17,11 @@ def criar_conexao():
     
 def criar_database():
     conexao = criar_conexao()
- 
+
     if conexao:
         cursor = conexao.cursor()
-        cursor.execute("CREATE DATABASE IF NOT EXISTS sistemaEscolar")
+        cursor.execute("CREATE DATABASE IF NOT EXISTS sistemaEscolar;")
+        cursor.execute("USE DATABASE sistemaEscolar;")
         print("Banco de dados criado com sucesso! :) ")
 
     cursor.close()
@@ -32,14 +33,15 @@ def criar_table():
     if conexao:
         cursor = conexao.cursor()
         criar_table = """
-        CREATE TABLE IF NOT EXISTS alunos (
+        CREATE TABLE IF NOT EXISTS alunos(
         id INT AUTO_INCREMENT PRIMARY KEY,
         nome VARCHAR(255) NOT NULL,
-        data_nascimento DATETIME,
+        data_nascimento DATE,
         turma VARCHAR(50),
         notas VARCHAR(255),
         media DECIMAL(4, 2),
-        situacao VARCHAR(50)"""
+        situacao VARCHAR(50)
+        );"""
 
     cursor.execute(criar_table)
     cursor.close()
@@ -76,3 +78,5 @@ def main():
         else:
             print("Opção inválida!")
  
+
+main()
