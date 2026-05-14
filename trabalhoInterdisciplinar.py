@@ -45,34 +45,46 @@ def criar_table():
     cursor.close()
     conexao.close()
 
-
-    print("Bem vindo ao sistema da escola Sepa prime")
+print("Bem vindo ao sistema da escola Sepa prime")
  
-def main():
+def menu():
     while True:
         print("\n --MENU--")
-        print("1 - Cadastrar aluno")
-        print("2 - Listar aluno")
-        print("3 - Remover aluno")
-        print("4 - Editar dados do aluno")
-        print("5 - Adicionar nota ")
-        print("6 - Remover notas")
-        print("7 - Situação do aluno")
-        print("8 - Buscar por aluno")
+        print("1 - Cadastrar aluno;")
+        print("2 - Listar aluno;")
+        print("3 - Remover aluno;")
+        print("4 - Editar dados do aluno;")
+        print("5 - Adicionar notas;")
+        print("6 - Remover notas;")
+        print("7 - Caucular media do aluno;")
+        print("8 - Situação do aluno;")
+        print("9 - Buscar por aluno;")
         print("0 - Sair")
  
         opcao = input("Escolha uma opção: ")
  
         if opcao == "1":
-            ()
+            Cadastrar_aluno()
         elif opcao == "2":
-            ()
+            Listar_aluno()
+        elif opcao == "3":
+            Remover aluno()
         elif opcao == "4":
-            ()
- 
+            Editar_dados_do_aluno()
+        elif opcao == "5":
+            Adicionar_notas()
+        elif opcao == "6":
+            Remover_notas()
+        elif opcao == "7":
+            Caucular_media_do_aluno()
+        elif opcao == "8":
+            "Situção_do_aluno"()
+        elif opcao == "9":
+            Buscar_por_aluno()
         elif opcao == "0":
             print("você saiu do Sistema da escola sepa prime")
             break
         else:
             print("Opção inválida!")
  
+menu()
