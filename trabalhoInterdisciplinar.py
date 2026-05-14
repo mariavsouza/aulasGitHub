@@ -60,14 +60,14 @@ def cadastrar_aluno():
     turma = input("Turma: ")
     notas = input("Notas: ")
     media = ("Media: ")
-    Situação = ("Situação do aluno: ")
+    situacao = ("Situação do aluno: ")
 
     sql = """
-    INSERT INTO alunos (nome, idade, turma)
+    INSERT INTO alunos (nome, idade, turma, notas, media, situacao)
     VALUES (%s, %s, %s)
     """
 
-    valores = (nome, idade, turma)
+    valores = (nome, idade, turma, notas, media, situacao)
 
     cursor.execute(sql, valores)
     conexao.commit()
