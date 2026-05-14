@@ -44,4 +44,35 @@ def criar_table():
     cursor.execute(criar_table)
     cursor.close()
     conexao.close()
-    conexao.close()    
+
+
+    print("Bem vindo ao sistema da escola Sepa prime")
+ 
+def main():
+    while True:
+        print("\n --MENU--")
+        print("1 - Cadastrar aluno")
+        print("2 - Listar aluno")
+        print("3 - Remover aluno")
+        print("4 - Editar dados do aluno")
+        print("5 - Adicionar nota ")
+        print("6 - Remover notas")
+        print("7 - Situação do aluno")
+        print("8 - Buscar por aluno")
+        print("0 - Sair")
+ 
+        opcao = input("Escolha uma opção: ")
+ 
+        if opcao == "1":
+            ()
+        elif opcao == "2":
+            ()
+        elif opcao == "4":
+            ()
+ 
+        elif opcao == "0":
+            print("você saiu do Sistema da escola sepa prime")
+            break
+        else:
+            print("Opção inválida!")
+ 
