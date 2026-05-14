@@ -45,6 +45,7 @@ def criar_table():
 
     cursor.execute(criar_table)
     cursor.close()
+<<<<<<< Updated upstream
     conexao.close()
 
 def cadastrar_aluno():
@@ -116,3 +117,6 @@ def menu():
 
 print("Bem vindo ao sistema da escola Instituto D'Souza")
 menu()
+=======
+    conexao.close()    
+>>>>>>> Stashed changes
