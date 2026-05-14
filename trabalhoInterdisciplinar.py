@@ -1,5 +1,6 @@
 import mysql.connector
 from mysql.connector import Error
+from datetime import datetime
 
 def criar_conexao():
     try:
@@ -48,8 +49,70 @@ def criar_table():
     cursor.close()
     conexao.close()
 
-def validar_dados():
-    ...
+def validar_nome(nome):
+    if not nome.strip():
+        return False, "O nome não pode estar vazio."
+ 
+    if not all(parte.isalpha() for parte in nome.replace(" ", "").split()):
+        return False, "O nome deve conter apenas letras."
+ 
+    return True, "Nome válido."
+ 
+ 
+def validar_nascimento(data_nascimento):
+    try:
+        data = datetime.strptime(data_nascimento, "%d/%m/%Y")
+ 
+        if data > datetime.now():
+            return False, "A data de nascimento não pode ser futura."
+ 
+        return True, "Data de nascimento válida."
+ 
+    except ValueError:
+        return False, "Formato inválido. Use DD/MM/AAAA."
+ 
+ 
+def validar_turma(turma):
+    if not turma.strip():
+        return False, "A turma não pode estar vazia."
+ 
+    return True, "Turma válida."
+ 
+def validar_notas(notas):
+    if not isinstance(notas, list):
+        return False, "As notas devem ser uma lista."
+ 
+    for nota in notas:
+        if not isinstance(nota, (int, float)):
+            return False, "Todas as notas devem ser numéricas."
+ 
+        if nota < 0 or nota > 10:
+            return False, "As notas devem estar entre 0 e 10."
+ 
+    return True, "Notas válidas."
+ 
+ 
+def calcular_media(notas):
+    return sum(notas) / len(notas)
+ 
+ 
+def validar_media(media):
+    if not isinstance(media, (int, float)):
+        return False, "A média deve ser numérica."
+ 
+    if media < 0 or media > 10:
+        return False, "A média deve estar entre 0 e 10."
+ 
+    return True, "Média válida."
+ 
+ 
+def definir_situacao(media):
+    if media >= 7:
+        return "Aprovado"
+    elif media >= 5:
+        return "Recuperação"
+    else:
+        return "Reprovado"
 
 def cadastrar_aluno():
     conexao = criar_conexao()
@@ -59,7 +122,7 @@ def cadastrar_aluno():
     idade = int(input("Idade: "))
     turma = input("Turma: ")
     notas = input("Notas: ")
-    media = ("Media: ")
+    media = float(input("Media: "))
     situacao = ("Situação do aluno: ")
 
     sql = """
