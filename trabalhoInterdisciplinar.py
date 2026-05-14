@@ -44,4 +44,15 @@ def criar_table():
     cursor.execute(criar_table)
     cursor.close()
     conexao.close()
+
+
+
+
+    # addfsadfas
+    # dfsad
+    # fsad
+    # finallysadf
+    # sad
+    # finallydf
+    # staticmethodsad
     
