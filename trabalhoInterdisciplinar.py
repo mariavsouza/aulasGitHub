@@ -123,7 +123,7 @@ def cadastrar_aluno():
     turma = input("Turma: ")
     notas = input("Notas: ")
     media = float(input("Media: "))
-    situacao = ("Situação do aluno: ")
+    situacao = input("Situação do aluno: ")
 
     sql = """
     INSERT INTO alunos (nome, idade, turma, notas, media, situacao)
@@ -156,7 +156,23 @@ def remover_notas():
     ...
 
 def caucular_media():
-    ...
+notas = []
+
+while True:
+    entrada = float(input("Digite uma nota (ou -1 para calcular a média): "))
+    
+    if entrada == -1:
+        break  
+        
+    notas.append(entrada)
+
+
+if len(notas) > 0:
+    media = sum(notas) / len(notas)
+    print(f"\nVocê digitou {len(notas)} notas.")
+    print(f"A média final é: {media:.2f}")
+else:
+    print("Nenhuma nota foi registrada.")
 
 def situção_aluno():
     ...
