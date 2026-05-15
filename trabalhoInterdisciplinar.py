@@ -23,7 +23,7 @@ def criar_database():
         cursor = conexao.cursor()
         cursor.execute("CREATE DATABASE IF NOT EXISTS sistemaEscolar;")
         cursor.execute("USE DATABASE sistemaEscolar;")
-        print("Banco de dados criado com sucesso! :")
+        print("Banco de dados criado com sucesso! :) ")
 
     conexao.commit()
     cursor.close()
@@ -38,10 +38,10 @@ def criar_table():
         criar_table = """
         CREATE TABLE IF NOT EXISTS alunos(
         id INT AUTO_INCREMENT PRIMARY KEY,
-        nome VARCHAR(100) NOT NULL,
+        nome VARCHAR(255) NOT NULL,
         data_nascimento DATE,
         turma VARCHAR(50),
-        notas DECIMAL(3, 1),
+        notas VARCHAR(255),
         media DECIMAL(4, 2),
         situacao VARCHAR(50)
         );"""
@@ -53,12 +53,10 @@ def criar_table():
 
 def validar_nome(nome):
     if not nome.strip():
-        print("O nome não pode estar vazio.")
-        return False
+        return False, "O nome não pode estar vazio."
  
     if not all(parte.isalpha() for parte in nome.replace(" ", "").split()):
-        print("O nome deve conter apenas letras.")
-        return False
+        return False, "O nome deve conter apenas letras."
  
     return True, "Nome válido."
  
@@ -145,7 +143,15 @@ def cadastrar_aluno():
 
 
 def listar_aluno():
-    ... 
+    if not listar_aluno:
+        print("Nenhum aluno cadastrado.")
+        return
+
+    print("\n---LISTA DE ALUNOS---")
+
+for i, aluno in enumerate(Aluno, start=1):
+    print(f"Aluno {i}: Nome: {aluno[0]}; Idade: {aluno[1]} anos; Cidade: {aluno[2]}.")
+ 
 
 def remover_aluno():
     ...
@@ -160,15 +166,17 @@ def remover_notas():
     ...
 
 def caucular_media():
-    notas.append
+    notas.append()
     notas = []
     while True:
-            entrada = float(input("Digite uma nota (ou -1 para calcular a média): "))
+        entrada = float(input("Digite uma nota (ou -1 para calcular a média): "))
+        
+        if entrada == -1:
+            break  
             
-            if entrada == -1:
-                break  
-                
+        else:
             notas.append(entrada)
+
 
     if len(notas) > 0:
         media = sum(notas) / len(notas)
@@ -185,7 +193,7 @@ def buscar_aluno():
 
 def menu():
     while True:
-        print("\n --- MENU ---")
+        print("\n --MENU--")
         print("1 - Cadastrar aluno;")
         print("2 - Listar aluno;")
         print("3 - Remover aluno;")
@@ -218,7 +226,7 @@ def menu():
         elif opcao == "9":
             buscar_aluno()
         elif opcao == "0":
-            print("Você saiu do Sistema Instituto D'Souza. Encerando sistema...")
+            print("você saiu do Sistema Instituto D'Souza")
             break
         else:
             print("Opção inválida!")
