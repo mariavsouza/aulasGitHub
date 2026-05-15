@@ -143,7 +143,17 @@ def cadastrar_aluno():
 
 
 def listar_aluno():
-    ...
+    if not listar_aluno:
+        print("Nenhum usuário cadastrado.")
+        return
+
+    print("\n---LISTA DE ALUNOS---")
+
+    i = 1
+    for usuario in listar_aluno:
+        print(f"{i} - Nome: {usuario[0]} | idade: {usuario[1]} | turma: {usuario[2]} \n")
+        i += 1
+
 
 def remover_aluno():
     ...
@@ -158,23 +168,24 @@ def remover_notas():
     ...
 
 def caucular_media():
-notas = []
-
-while True:
-    entrada = float(input("Digite uma nota (ou -1 para calcular a média): "))
-    
-    if entrada == -1:
-        break  
+    notas.append()
+    notas = []
+    while True:
+        entrada = float(input("Digite uma nota (ou -1 para calcular a média): "))
         
-    notas.append(entrada)
+        if entrada == -1:
+            break  
+            
+        else:
+            notas.append(entrada)
 
 
-if len(notas) > 0:
-    media = sum(notas) / len(notas)
-    print(f"\nVocê digitou {len(notas)} notas.")
-    print(f"A média final é: {media:.2f}")
-else:
-    print("Nenhuma nota foi registrada.")
+    if len(notas) > 0:
+        media = sum(notas) / len(notas)
+        print(f"\nVocê digitou {len(notas)} notas.")
+        print(f"A média final é: {media:.2f}")
+    else:
+        print("Nenhuma nota foi registrada.")
 
 def situção_aluno():
     ...
