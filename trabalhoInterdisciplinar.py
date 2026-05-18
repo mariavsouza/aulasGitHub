@@ -1,6 +1,7 @@
 import mysql.connector
 from mysql.connector import Error
 from datetime import datetime
+alunos = []
 
 def criar_conexao():
     try:
@@ -121,18 +122,28 @@ def cadastrar_aluno():
     cursor = conexao.cursor()
 
     nome = input("Nome do aluno: ")
-    idade = int(input("Idade: "))
+    if not validar_nome():
+        return False
+    
+    data_nascimento = datetime(input("Data de Nascimento: "))
+    if not validar_nascimento():
+        return False
+
     turma = input("Turma: ")
-    notas = input("Notas: ")
-    media = float(input("Media: "))
-    situacao = input("Situação do aluno: ")
+    if not validar_turma():
+        return False
+
+    dados = [nome, data_nascimento, turma]
+    alunos.append(dados)
+
+    print("Aluno cadastrado com sucesso!")
 
     sql = """
-    INSERT INTO alunos (nome, idade, turma, notas, media, situacao)
+    INSERT INTO alunos (nome, data_nascimento, turma)
     VALUES (%s, %s, %s)
     """
 
-    valores = (nome, idade, turma, notas, media, situacao)
+    valores = (nome, data_nascimento, turma)
 
     cursor.execute(sql, valores)
     conexao.commit()
@@ -149,7 +160,7 @@ def listar_aluno():
 
     print("\n---LISTA DE ALUNOS---")
 
-for i, aluno in enumerate(Aluno, start=1):
+for i, aluno in enumerate(alunos, start=1):
     print(f"Aluno {i}: Nome: {aluno[0]}; Idade: {aluno[1]} anos; Cidade: {aluno[2]}.")
  
 
