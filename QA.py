@@ -22,7 +22,7 @@ def validar_nascimento(data_nascimento):
             print("A data de nascimento não pode ser futura.")
             return False
  
-        return True,
+        return True
  
     except ValueError:
         print("Formato inválido. Use DD/MM/AAAA.")
@@ -32,6 +32,7 @@ def validar_nascimento(data_nascimento):
 def validar_turma(turma):
     if not turma.strip():
         print("A turma não pode estar vazia.")
+
         return False
  
     return True
@@ -62,13 +63,7 @@ def calcular_media(notas):
  
  
 def validar_media(media):
-    if not isinstance(media, (int, float)):
-        return False, "A média deve ser numérica."
- 
-    if media < 0 or media > 10:
-        return False, "A média deve estar entre 0 e 10."
- 
-    return True, "Média válida."
+    ...
  
  
 def definir_situacao(media):
@@ -83,36 +78,34 @@ def cadastrar_aluno():
     while True:
         nome = input("Nome do aluno: ")
         if not validar_nome(nome):
-            return False
+            return 
         
         data_nascimento = input("Data de Nascimento: ")
         if not validar_nascimento(data_nascimento):
-            return False
+            return 
 
         turma = input("Turma: ")
         if not validar_turma(turma):
-            return False
+            return 
+        
+        notas = []
 
-        dados = [nome, data_nascimento, turma]
+        dados = [nome, data_nascimento, turma, notas]
         alunos.append(dados)
         
-
         print("Aluno cadastrado com sucesso!")
         break
 
 
 def listar_aluno():
-    id_aluno = int(input("Digite o ID do aluno: "))
+    if not alunos:
+        print("Nenhum aluno foi cadastrado ainda")
+        return 
 
-    if id_aluno not in alunos:
-        print("Aluno não encontrado.")
-        return
-
-
-    print("\n--- LISTA DE ALUNOS ---")
-    
-    for i, aluno in enumerate(alunos, start=1):
-        print(f"Aluno {i}: Nome: {aluno[0]}; Idade: {aluno[1]} anos; Cidade: {aluno[2]}.")
+    else:
+        print("\n--- LISTA DE ALUNOS ---")
+        for i, aluno in enumerate(alunos, start=1):
+            print(f"Aluno {i}: Nome: {aluno[0]}; Data de nascimento: {aluno[1]}; Turma: {aluno[2]}.")
 
 def remover_aluno():
     ...
@@ -121,52 +114,46 @@ def editar_dados():
     ...
 
 def adicionar_notas():
-    id_aluno = int(input("Digite o ID do aluno: "))
-
-    if id_aluno not in alunos:
-        print("Aluno não encontrado.")
+    
+    if not alunos:
+        print("Nenhum aluno cadastrado no sistema.")
         return
 
+    print("\n--- Lista de Alunos ---")
+    for i, aluno in enumerate(alunos, start=1):
+        print(f"Aluno {i}: Nome: {aluno[0]}; Data de nascimento: {aluno[1]}; Turma: {aluno[2]}")
+    id_aluno = int(input("Digite o ID do aluno que você quer adicionar uma nota: "))
+
+    if id_aluno < 1 or id_aluno > len(alunos):
+        print("Aluno não encontrado.")
+
     entrada = float(input("Digite a nota: "))
-    alunos[id_aluno]["notas"].append(entrada)
+    indice_real = id_aluno - 1
+    alunos[indice_real][3].append(entrada)
+    
 
     print("Nota adicionada!")
 
 def remover_notas():
-    id_aluno = int(input("Digite o ID do aluno: "))
-
-    if id_aluno not in alunos:
-        print("Aluno não encontrado :( ")
-        return
-
-    if not alunos[id_aluno]["notas"]:
-        print("Esse aluno não possui notas :(")
-        return
-
-    print("Notas:", alunos[id_aluno]["notas"])
-    nota = float(input("Digite a nota que deseja remover: "))
-
-    if nota in alunos[id_aluno]["notas"]:
-        alunos[id_aluno]["notas"].remove(nota)
-        print("Nota removida!")
-    else:
-        print("Nota não encontrada.")
+    ...
 
 def caucular_media():
-    id_aluno = int(input("Digite o ID do aluno: "))
-
-    if id_aluno not in alunos:
-        print("Aluno não encontrado :(")
-        return
-
-    notas = alunos[id_aluno]["notas"]
+    notas.append()
+    while True:
+        entrada = float(input("Digite uma nota (ou -1 para calcular a média): "))
+        
+        if entrada == -1:
+            break  
+            
+        else:
+            notas.append(entrada)
 
     if len(notas) > 0:
         media = sum(notas) / len(notas)
         print(f"\nVocê digitou {len(notas)} notas.")
         print(f"A média final é: {media:.2f}")
     else:
-        print("Nenhuma nota foi registrada :(")
+        print("Nenhuma nota foi registrada.")
 
 def situção_aluno():
     ...

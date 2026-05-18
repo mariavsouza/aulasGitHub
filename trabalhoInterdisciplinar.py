@@ -18,49 +18,16 @@ def criar_conexao():
         print(f"Erro ao conectar ao MySQL: {e}")
         return None
     
-def criar_database():
-    conexao = criar_conexao()
-
-    if conexao:
-        cursor = conexao.cursor()
-        cursor.execute("CREATE DATABASE IF NOT EXISTS sistemaEscolar;")
-        cursor.execute("USE DATABASE sistemaEscolar;")
-        print("Banco de dados criado com sucesso! :) ")
-
-    conexao.commit()
-    cursor.close()
-    conexao.close()
-
-def criar_table():
-    conexao = criar_conexao()
- 
-    if conexao:
-        cursor = conexao.cursor()
-    
-        criar_table = """
-        CREATE TABLE IF NOT EXISTS alunos(
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        nome VARCHAR(255) NOT NULL,
-        data_nascimento DATE,
-        turma VARCHAR(50),
-        notas VARCHAR(255),
-        media DECIMAL(4, 2),
-        situacao VARCHAR(50)
-        );"""
-
-    cursor.execute(criar_table)
-    conexao.commit()
-    cursor.close()
-    conexao.close()
-
 def validar_nome(nome):
     if not nome.strip():
-        return False, "O nome não pode estar vazio."
+        print("O nome não pode estar vazio.")
+        return False
  
     if not all(parte.isalpha() for parte in nome.replace(" ", "").split()):
-        return False, "O nome deve conter apenas letras."
+        print("O nome deve conter apenas letras.")
+        return False
  
-    return True, "Nome válido."
+    return True
  
  
 def validar_nascimento(data_nascimento):
@@ -68,47 +35,37 @@ def validar_nascimento(data_nascimento):
         data = datetime.strptime(data_nascimento, "%d/%m/%Y")
  
         if data > datetime.now():
-            return False, "A data de nascimento não pode ser futura."
+            print("A data de nascimento não pode ser futura.")
+            return 
  
-        return True, "Data de nascimento válida."
  
     except ValueError:
-        return False, "Formato inválido. Use DD/MM/AAAA."
+        print("Formato inválido. Use DD/MM/AAAA.")
+        return 
  
  
 def validar_turma(turma):
     if not turma.strip():
-        return False, "A turma não pode estar vazia."
- 
-    return True, "Turma válida."
+        print("A turma não pode estar vazia.")
+
+        return 
  
 def validar_notas(notas):
     if not isinstance(notas, list):
-        return False, "As notas devem ser uma lista."
+        print("As notas devem ser uma lista.")
+        return 
  
     for nota in notas:
         if not isinstance(nota, (int, float)):
-            return False, "Todas as notas devem ser numéricas."
+            print("Todas as notas devem ser numéricas.")
+            return
  
         if nota < 0 or nota > 10:
-            return False, "As notas devem estar entre 0 e 10."
- 
-    return True, "Notas válidas."
- 
+            print("As notas devem estar entre 0 e 10.")
+            return
  
 def calcular_media(notas):
-    return sum(notas) / len(notas)
- 
- 
-def validar_media(media):
-    if not isinstance(media, (int, float)):
-        return False, "A média deve ser numérica."
- 
-    if media < 0 or media > 10:
-        return False, "A média deve estar entre 0 e 10."
- 
-    return True, "Média válida."
- 
+    ...
  
 def definir_situacao(media):
     if media >= 7:
@@ -119,48 +76,38 @@ def definir_situacao(media):
         return "Reprovado"
 
 def cadastrar_aluno():
-    conexao = criar_conexao()
-    cursor = conexao.cursor()
-
     nome = input("Nome do aluno: ")
-    if not validar_nome():
-        return False
-    
-    data_nascimento = datetime(input("Data de Nascimento: "))
-    if not validar_nascimento():
-        return False
+    if not validar_nome(nome):
+            return 
+        
+    data_nascimento = input("Data de Nascimento: ")
+    if not validar_nascimento(data_nascimento):
+            return 
 
     turma = input("Turma: ")
-    if not validar_turma():
-        return False
+    if not validar_turma(turma):
+            return 
+        
+    notas = []
 
-    dados = [nome, data_nascimento, turma]
+    dados = [nome, data_nascimento, turma, notas]
     alunos.append(dados)
-
+        
     print("Aluno cadastrado com sucesso!")
-
-    sql = """
-    INSERT INTO alunos (nome, data_nascimento, turma)
-    VALUES (%s, %s, %s)
-    """
-
-    valores = (nome, data_nascimento, turma)
-
-    cursor.execute(sql, valores)
-    conexao.commit()
-    cursor.close()
-    conexao.close()
-
-    print("Aluno cadastrado com sucesso!")
+        
 
 def listar_aluno():
-    id_aluno = int(input("Digite o ID do aluno: "))
+    if not alunos:
+        print("Nenhum aluno foi cadastrado ainda")
+        return 
 
-    if id_aluno not in alunos:
-        print("Aluno não encontrado.")
-        return
+    else:
+        print("\n--- LISTA DE ALUNOS ---")
+        for i, aluno in enumerate(alunos, start=1):
+            print(f"Aluno {i}: Nome: {aluno[0]}; Data de nascimento: {aluno[1]}; Turma: {aluno[2]}.")
 
 
+<<<<<<< Updated upstream
     print("\n--- LISTA DE ALUNOS ---")
     
     for i, aluno in enumerate(alunos, start=1):
@@ -178,6 +125,10 @@ def remover_aluno(id_aluno, nota):
             return False
     print(f"\nAluno com ID (id_aluno) não encontrado.")
     return False
+=======
+def remover_aluno():
+    ...
+>>>>>>> Stashed changes
 
 def editar_dados(id_aluno, novo_nome):
     for aluno in alunos:
@@ -188,6 +139,7 @@ def editar_dados(id_aluno, novo_nome):
     print(f"\nAluno com ID {id_aluno} não encontrado.")
     return False
 
+<<<<<<< Updated upstream
 def adicionar_notas(id_aluno, nota):
     for aluno in alunos:
         if aluno["id"] == id_aluno:
@@ -196,6 +148,24 @@ def adicionar_notas(id_aluno, nota):
             return True
     print(f"\nAluno com ID {id_aluno} não encontrado.")
     return False
+=======
+def adicionar_notas():
+    if not alunos:
+        print("Nenhum aluno cadastrado no sistema.")
+        return
+
+    print("\n--- Lista de Alunos ---")
+    for i, aluno in enumerate(alunos, start=1):
+        print(f"Aluno {i}: Nome: {aluno[0]}; Data de nascimento: {aluno[1]}; Turma: {aluno[2]}")
+    id_aluno = int(input("Digite o ID do aluno que você quer adicionar uma nota: "))
+
+    if id_aluno < 1 or id_aluno > len(alunos):
+        print("Aluno não encontrado.")
+
+    entrada = float(input("Digite a nota: "))
+    indice_real = id_aluno - 1
+    alunos[indice_real][3].append(entrada)
+>>>>>>> Stashed changes
 
 def remover_notas(id_aluno, nota):
     for aluno in alunos:
@@ -211,7 +181,6 @@ def remover_notas(id_aluno, nota):
 
 def caucular_media():
     notas.append()
-    notas = []
     while True:
         entrada = float(input("Digite uma nota (ou -1 para calcular a média): "))
         
@@ -220,7 +189,6 @@ def caucular_media():
             
         else:
             notas.append(entrada)
-
 
     if len(notas) > 0:
         media = sum(notas) / len(notas)

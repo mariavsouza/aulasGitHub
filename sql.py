@@ -24,6 +24,7 @@ def criar_database():
         cursor.execute("USE DATABASE sistemaEscolar;")
         print("Banco de dados criado com sucesso! :) ")
 
+    conexao.commit()
     cursor.close()
     conexao.close()
 
@@ -32,6 +33,7 @@ def criar_table():
  
     if conexao:
         cursor = conexao.cursor()
+    
         criar_table = """
         CREATE TABLE IF NOT EXISTS alunos(
         id INT AUTO_INCREMENT PRIMARY KEY,
@@ -44,5 +46,6 @@ def criar_table():
         );"""
 
     cursor.execute(criar_table)
+    conexao.commit()
     cursor.close()
     conexao.close()
