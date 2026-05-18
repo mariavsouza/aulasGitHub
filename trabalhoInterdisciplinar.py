@@ -75,7 +75,7 @@ def definir_situacao(media):
     else:
         return "Reprovado"
 
-def cadastrar_aluno():
+def cadastrar_aluno(): #completo
     nome = input("Nome do aluno: ")
     if not validar_nome(nome):
             return 
@@ -96,7 +96,7 @@ def cadastrar_aluno():
     print("Aluno cadastrado com sucesso!")
         
 
-def listar_aluno():
+def listar_aluno():#completo
     if not alunos:
         print("Nenhum aluno foi cadastrado ainda")
         return 
@@ -106,15 +106,13 @@ def listar_aluno():
         for i, aluno in enumerate(alunos, start=1):
             print(f"Aluno {i}: Nome: {aluno[0]}; Data de nascimento: {aluno[1]}; Turma: {aluno[2]}.")
 
-
-
     print("\n--- LISTA DE ALUNOS ---")
     
     for i, aluno in enumerate(alunos, start=1):
         print(f"Aluno {i}: Nome: {aluno[0]}; Idade: {aluno[1]} anos; Cidade: {aluno[2]}.")
  
 
-def remover_aluno(id_aluno, nota):
+def remover_aluno(id_aluno, nota): #refazer
     for i, aluno in enumerate(alunos):
         if aluno["id"] == id.aluno:
             if nota in aluno["notas"]:
@@ -136,7 +134,7 @@ def editar_dados(id_aluno, novo_nome):
     print(f"\nAluno com ID {id_aluno} não encontrado.")
     return False
 
-def adicionar_notas():
+def adicionar_notas():#completo
     if not alunos:
         print("Nenhum aluno cadastrado no sistema.")
         return
@@ -153,7 +151,7 @@ def adicionar_notas():
     indice_real = id_aluno - 1
     alunos[indice_real][3].append(entrada)
 
-def remover_notas(id_aluno, nota):
+def remover_notas(id_aluno, nota):#testar
     for aluno in alunos:
         if aluno["id"] == id_aluno:
             if nota in aluno["notas"]:
@@ -165,7 +163,7 @@ def remover_notas(id_aluno, nota):
     print(f"\nAluno com ID {id_aluno} não encontrado.")
     return False
 
-def caucular_media():
+def caucular_media():#testar
     notas.append()
     while True:
         entrada = float(input("Digite uma nota (ou -1 para calcular a média): "))
