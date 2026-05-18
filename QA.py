@@ -91,14 +91,24 @@ def cadastrar_aluno():
 
         dados = [nome, data_nascimento, turma]
         alunos.append(dados)
-
+        
 
         print("Aluno cadastrado com sucesso!")
         break
 
 
 def listar_aluno():
-    ...
+    id_aluno = int(input("Digite o ID do aluno: "))
+
+    if id_aluno not in alunos:
+        print("Aluno não encontrado.")
+        return
+
+
+    print("\n--- LISTA DE ALUNOS ---")
+    
+    for i, aluno in enumerate(alunos, start=1):
+        print(f"Aluno {i}: Nome: {aluno[0]}; Idade: {aluno[1]} anos; Cidade: {aluno[2]}.")
 
 def remover_aluno():
     ...

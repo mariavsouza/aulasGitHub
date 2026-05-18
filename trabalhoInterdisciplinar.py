@@ -1,6 +1,8 @@
 import mysql.connector
 from mysql.connector import Error
 from datetime import datetime
+notas = []
+alunos = []
 
 def criar_conexao():
     try:
@@ -141,16 +143,18 @@ def cadastrar_aluno():
 
     print("Aluno cadastrado com sucesso!")
 
-
 def listar_aluno():
-    if not listar_aluno:
-        print("Nenhum aluno cadastrado.")
+    id_aluno = int(input("Digite o ID do aluno: "))
+
+    if id_aluno not in alunos:
+        print("Aluno não encontrado.")
         return
 
-    print("\n---LISTA DE ALUNOS---")
 
-for i, aluno in enumerate(Aluno, start=1):
-    print(f"Aluno {i}: Nome: {aluno[0]}; Idade: {aluno[1]} anos; Cidade: {aluno[2]}.")
+    print("\n--- LISTA DE ALUNOS ---")
+    
+    for i, aluno in enumerate(alunos, start=1):
+        print(f"Aluno {i}: Nome: {aluno[0]}; Idade: {aluno[1]} anos; Cidade: {aluno[2]}.")
  
 
 def remover_aluno():
