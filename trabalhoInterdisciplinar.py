@@ -107,7 +107,7 @@ def listar_aluno():
             print(f"Aluno {i}: Nome: {aluno[0]}; Data de nascimento: {aluno[1]}; Turma: {aluno[2]}.")
 
 
-<<<<<<< Updated upstream
+
     print("\n--- LISTA DE ALUNOS ---")
     
     for i, aluno in enumerate(alunos, start=1):
@@ -125,10 +125,7 @@ def remover_aluno(id_aluno, nota):
             return False
     print(f"\nAluno com ID (id_aluno) não encontrado.")
     return False
-=======
-def remover_aluno():
-    ...
->>>>>>> Stashed changes
+
 
 def editar_dados(id_aluno, novo_nome):
     for aluno in alunos:
@@ -139,16 +136,6 @@ def editar_dados(id_aluno, novo_nome):
     print(f"\nAluno com ID {id_aluno} não encontrado.")
     return False
 
-<<<<<<< Updated upstream
-def adicionar_notas(id_aluno, nota):
-    for aluno in alunos:
-        if aluno["id"] == id_aluno:
-            aluno["notas"].append(nota)
-            print(f"\nNota {nota} adicionada! Notas de {aluno['nome']}: {aluno['notas']}")
-            return True
-    print(f"\nAluno com ID {id_aluno} não encontrado.")
-    return False
-=======
 def adicionar_notas():
     if not alunos:
         print("Nenhum aluno cadastrado no sistema.")
@@ -165,7 +152,6 @@ def adicionar_notas():
     entrada = float(input("Digite a nota: "))
     indice_real = id_aluno - 1
     alunos[indice_real][3].append(entrada)
->>>>>>> Stashed changes
 
 def remover_notas(id_aluno, nota):
     for aluno in alunos:
