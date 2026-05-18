@@ -204,7 +204,7 @@ def buscar_aluno():
 
 def menu():
     while True:
-        print("\n --MENU--")
+        print("\n --- MENU ---")
         print("1 - Cadastrar aluno;")
         print("2 - Listar aluno;")
         print("3 - Remover aluno;")
@@ -216,7 +216,7 @@ def menu():
         print("9 - Buscar por aluno;")
         print("0 - Sair")
  
-        opcao = input("Escolha uma opção: ")
+        opcao = input("\nEscolha uma opção: ")
  
         if opcao == "1":
             cadastrar_aluno()
@@ -237,10 +237,10 @@ def menu():
         elif opcao == "9":
             buscar_aluno()
         elif opcao == "0":
-            print("você saiu do Sistema Instituto D'Souza")
+            print("\nVocê saiu do Sistema Instituto D'Souza. Encerando sistema...")
             break
         else:
-            print("Opção inválida!")
+            print("Opção inválida! Escolha uma das opções mostradas a baixo.")
 
-print("Bem vindo ao sistema do Instituto D'Souza")
+print("\n----- Bem vindo ao sistema do Instituto D'Souza -----")
 menu()
