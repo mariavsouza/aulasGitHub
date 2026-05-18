@@ -36,6 +36,10 @@ def validar_turma(turma):
  
     return True
  
+
+
+
+ 
 def validar_notas(notas):
     if not isinstance(notas, list):
         print("As notas devem ser uma lista.")
