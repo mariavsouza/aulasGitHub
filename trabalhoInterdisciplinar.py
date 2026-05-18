@@ -179,13 +179,35 @@ def remover_aluno(id_aluno, nota):
     print(f"\nAluno com ID (id_aluno) não encontrado.")
     return False
 
-def editar_dados():
-    ...
-def adicionar_notas():
-    ...
+def editar_dados(id_aluno, novo_nome):
+    for aluno in alunos:
+        if aluno["id"] == id_aluno:
+            aluno["nome"] = novo_nome
+            print(f"\nDados atualizados: {aluno['id']} - {aluno['nome']}")
+            return True
+    print(f"\nAluno com ID {id_aluno} não encontrado.")
+    return False
 
-def remover_notas():
-    ...
+def adicionar_notas(id_aluno, nota):
+    for aluno in alunos:
+        if aluno["id"] == id_aluno:
+            aluno["notas"].append(nota)
+            print(f"\nNota {nota} adicionada! Notas de {aluno['nome']}: {aluno['notas']}")
+            return True
+    print(f"\nAluno com ID {id_aluno} não encontrado.")
+    return False
+
+def remover_notas(id_aluno, nota):
+    for aluno in alunos:
+        if aluno["id"] == id_aluno:
+            if nota in aluno["notas"]:
+                aluno["notas"].remove(nota)
+                print(f"\nNota {nota} removida! Notas de {aluno['nome']}: {aluno['notas']}")
+                return True
+            print(f"\nNota {nota} não encontrada para {aluno['nome']}.")
+            return False
+    print(f"\nAluno com ID {id_aluno} não encontrado.")
+    return False
 
 def caucular_media():
     notas.append()
