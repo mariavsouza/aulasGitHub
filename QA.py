@@ -58,9 +58,30 @@ def validar_notas(notas):
     return True
  
  
-def calcular_media(notas):
-    return sum(notas) / len(notas)
- 
+def calcular_media(notas_do_aluno):
+    if not alunos:
+        print("Nenhum aluno cadastrado no sistema.")
+        return
+
+    print("\n--- Lista de Alunos ---")
+    for i, aluno in enumerate(alunos, start=1):
+        print(f"Aluno {i}: Nome: {aluno[0]}; Data de nascimento: {aluno[1]}; Turma: {aluno[2]}")
+    
+    id_aluno = int(input("Digite o ID do aluno que você quer calcular a média: "))
+
+    if id_aluno < 1 or id_aluno > len(alunos):
+        print("Aluno não encontrado :(")
+        return 
+
+    indice_real = id_aluno - 1
+    notas_do_aluno = alunos[indice_real][3]
+
+    if len(notas_do_aluno) > 0:
+        media = sum(notas_do_aluno) / len(notas_do_aluno)
+        print(f"\nO aluno possui {len(notas_do_aluno)} notas registradas.")
+        print(f"A média final é: {media:.2f}")
+    else:
+        print("Nenhuma nota foi registrada para este aluno ainda.")
  
 def validar_media(media):
     ...
