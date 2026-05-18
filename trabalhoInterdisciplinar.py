@@ -167,12 +167,20 @@ def listar_aluno():
         print(f"Aluno {i}: Nome: {aluno[0]}; Idade: {aluno[1]} anos; Cidade: {aluno[2]}.")
  
 
-def remover_aluno():
-    ...
+def remover_aluno(id_aluno, nota):
+    for i, aluno in enumerate(alunos):
+        if aluno["id"] == id.aluno:
+            if nota in aluno["notas"]:
+                aluno["notas"].remove.nota
+                print(f"\nNota (nota) removida! Notas de {aluno['nome']}: {aluno['notas']}")
+                return True
+            print(f"\nNota (nota) não encontrada para {aluno['nome']}.")
+            return False
+    print(f"\nAluno com ID (id_aluno) não encontrado.")
+    return False
 
 def editar_dados():
     ...
-
 def adicionar_notas():
     ...
 
