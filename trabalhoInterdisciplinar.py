@@ -1,23 +1,7 @@
-import mysql.connector
-from mysql.connector import Error
 from datetime import datetime
 notas = []
 alunos = []
 
-def criar_conexao():
-    try:
-        conexao = mysql.connector.connect(
-            host='127.0.0.1',
-            user='root',
-            password='Senac2026',
-            database='sistemaEscolar'
-        )
-        return conexao
- 
-    except Error as e:
-        print(f"Erro ao conectar ao MySQL: {e}")
-        return None
-    
 def validar_nome(nome):
     if not nome.strip():
         print("O nome não pode estar vazio.")
