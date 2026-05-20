@@ -13,7 +13,6 @@ def validar_nome(nome):
  
     return True
  
- 
 def validar_nascimento(data_nascimento):
     try:
         data = datetime.strptime(data_nascimento, "%d/%m/%Y")
@@ -36,11 +35,7 @@ def validar_turma(turma):
         return False
  
     return True
- 
 
-
-
- 
 def validar_notas(notas):
     if not isinstance(notas, list):
         print("As notas devem ser uma lista.")
@@ -58,7 +53,7 @@ def validar_notas(notas):
     return True
  
  
-def calcular_media(notas_do_aluno):
+def calcular_media(notas_aluno):
     if not alunos:
         print("Nenhum aluno cadastrado no sistema.")
         return
@@ -74,26 +69,51 @@ def calcular_media(notas_do_aluno):
         return 
 
     indice_real = id_aluno - 1
-    notas_do_aluno = alunos[indice_real][3]
+    notas_aluno = alunos[indice_real][3]
 
-    if len(notas_do_aluno) > 0:
-        media = sum(notas_do_aluno) / len(notas_do_aluno)
-        print(f"\nO aluno possui {len(notas_do_aluno)} notas registradas.")
+    if len(notas_aluno) > 0:
+        media = sum(notas_aluno) / len(notas_aluno)
+        print(f"\nO aluno possui {len(notas_aluno)} notas registradas.")
         print(f"A média final é: {media:.2f}")
     else:
         print("Nenhuma nota foi registrada para este aluno ainda.")
  
-def validar_media(media):
+def validar_media():
     ...
  
  
-def definir_situacao(media):
-    if media >= 7:
-        return "Aprovado"
-    elif media >= 5:
-        return "Recuperação"
+def definir_situacao():
+    if not alunos:
+        print("Nenhum aluno cadastrado no sistema.")
+        return
+    
+    print("--- ALUNOS CADASTRADOS ---")
+    for i, aluno in enumerate(alunos, start=1):
+        print(f"Aluno {i}: Nome: {aluno[0]}; Data de nascimento: {aluno[1]}; Turma: {aluno[2]}")
+    id_aluno = int(input("Digite o ID do aluno que você quer ver a situação: "))
+
+    if id_aluno < 1 or id_aluno > len(alunos):
+        print("Aluno não encontrado.")
+
+    if id_aluno not in notas:
+        print(f"Nenhuma nota cadastrada para o ID: {id_aluno}")
+        return
+
+    media = sum(notas[id_aluno]) / len(notas[id_aluno])
+    VERDE = "\033[32m"
+    AMARELO = "\033[33m"
+    VERMELHO = "\033[31m"
+    RESET = "\033[m"
+
+    if media >= 7.0:
+        situacao = f"{VERDE}Aprovado{RESET}"
+    elif 5.0 <= media < 7.0:
+        situacao = f"{AMARELO}Em recuperação{RESET}"
     else:
-        return "Reprovado"
+        situacao = f"{VERMELHO}Reprovado{RESET}"
+
+    print(f"Aluno ID: {id_aluno} | Média: {media:.2f} | Situação: {situacao}")
+
 
 def cadastrar_aluno():
     while True:
@@ -176,9 +196,6 @@ def caucular_media():
     else:
         print("Nenhuma nota foi registrada.")
 
-def situção_aluno():
-    ...
-
 def buscar_aluno():
     ...
 
@@ -213,7 +230,7 @@ def menu():
         elif opcao == "7":
             caucular_media()
         elif opcao == "8":
-            situção_aluno()
+            definir_situacao()
         elif opcao == "9":
             buscar_aluno()
         elif opcao == "0":

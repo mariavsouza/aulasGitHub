@@ -1,4 +1,5 @@
 from datetime import datetime
+from colorama import init, Fore
 notas = []
 alunos = []
 
@@ -13,7 +14,6 @@ def validar_nome(nome):
  
     return True
  
- 
 def validar_nascimento(data_nascimento):
     try:
         data = datetime.strptime(data_nascimento, "%d/%m/%Y")
@@ -22,7 +22,7 @@ def validar_nascimento(data_nascimento):
             print("A data de nascimento não pode ser futura.")
             return 
  
- 
+
     except ValueError:
         print("Formato inválido. Use DD/MM/AAAA.")
         return 
@@ -51,13 +51,14 @@ def validar_notas(notas):
 def calcular_media(notas):
     ...
  
-def definir_situacao(media):
+def definir_situacao():
+    media = input("Digite sua média: ")
     if media >= 7:
-        return "Aprovado"
+        return f"{Fore.GREEN}Aprovado{Fore.RESET}"
     elif media >= 5:
-        return "Recuperação"
+        return f"{Fore.YELLOW}Em Recuperação{Fore.RESET}"
     else:
-        return "Reprovado"
+        return f"{Fore.RED}Em Recuperação{Fore.RESET}"
 
 def cadastrar_aluno(): #completo
     nome = input("Nome do aluno: ")
@@ -78,7 +79,6 @@ def cadastrar_aluno(): #completo
     alunos.append(dados)
         
     print("Aluno cadastrado com sucesso!")
-        
 
 def listar_aluno():#completo
     if not alunos:
