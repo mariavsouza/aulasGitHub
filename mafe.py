@@ -67,22 +67,37 @@ def menu_professor():
             print(">>ERRO<<\nEscolha uma opção válida mostrada acima!")
             continue
         
-def menu_secretario(): #EDITAR AS FUNÇÕES!!!!
+def menu_secretario():
      while True:
         print("\n --- MENU DE AÇÕES DO SECRETÁRIO---")
-        print("1 - Adicionar Notas")
-        print("2 - Remover Notas")
-        print("3 - Editar Notas")
+        print("1 - Cadastrar Aluno")
+        print("2 - Remover Aluno")
+        print("3 - Cadastrar Professor")
+        print("4 - Remover Professor")
+        print("5  - Cadastrar Turma")
+        print("6 - Remover Turma")
+        print("7 - Editar Dados dos Aluno")
+        print("8 - Editar Dados do Professor")
         print("0 - Sair do Sistema ")
-        actProf = input("\nO que você deseja fazer: ")
+        actSecre = input("\nO que você deseja fazer: ")
 
-        if actProf == "1":
+        if actSecre == "1":
             ...
-        elif actProf == "2":
+        elif actSecre == "2":
             ...
-        elif actProf == "3":
+        elif actSecre == "3":
             ...
-        elif actProf == "0":
+        elif actSecre == "4":
+            ...
+        elif actSecre == "5":
+            ...
+        elif actSecre == "6":
+            ...
+        elif actSecre == "7":
+            ...
+        elif actSecre == "8":
+            ...
+        elif actSecre == "0":
             print("\nVocê saiu do Sistema Instituto D'Souza. Encerando serviços...")
             break
         else:
