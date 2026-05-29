@@ -23,15 +23,54 @@ def criar_conexao():
         return None
     
 #validações
+def validar_nome():
+    ...
 
+def validar_nascimento():
+    ...
+
+def validar_turma():
+    ...
+
+def validar_notsa():
+    ...
+
+def validar_materia():
+    ...
 
 #funções
+def cadastrar_aluno():
+    nome = input("Nome do aluno: ")
+    if not validar_nome():
+            return 
+        
+    data_nascimento = input("Data de Nascimento: ")
+    if not validar_nascimento():
+            return 
 
+    turma = input("Turma: ")
+    if not validar_turma():
+            return 
+
+    dados = [nome, data_nascimento, turma, notas]
+    alunos.append(dados)
+
+def cadastrar_prof():
+    nome = input("Nome do Professor: ")
+    if not validar_nome():
+            return 
+
+    materia = input("Matéria Lecionada: ")
+    if not validar_materia():
+            return 
+
+    dadosprof = [nome, materia]
+    professores.append(dadosprof)
 
 #menus
 def menu_aluno():
     while True:
-        print("\n --- MENU DE AÇÕES DO ALUNO\RESPONSÁVEL ---")
+        print("\n --- MENU DE AÇÕES DO ALUNO\\RESPONSÁVEL ---")
         print("1 - Visualizar parecer do aluno")
         print("0 - Sair do Sistema")
         actAluno = input("\nO que você deseja fazer: ")
@@ -108,7 +147,7 @@ def menu_inicial():
     print("\n----- Bem vindo ao sistema do Instituto D'Souza -----")
     while True:  
         print("\n --- OPÇÕES DE LOGIN ---")
-        print("1 - Aluno\Responsável")
+        print("1 - Aluno\\Responsável")
         print("2 - Professor(a)")
         print("3 - Secretário")
         print("0 - Sair do Sistema")
