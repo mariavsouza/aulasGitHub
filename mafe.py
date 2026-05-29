@@ -6,8 +6,9 @@ from datetime import datetime
 #listas pré estabelecidas
 alunos = []
 professores = []
+turma = []
 notas = []
-materias = []
+materias = ["português", "inglês", "artes", "educação física", "matemática", "geografia", "história", "sociologia", "filosofia", "biologia", "química", "física", "projeto de vida",]
 
 #conexão com mySQL (sem conexão nas defs ainda)
 def criar_conexao():
