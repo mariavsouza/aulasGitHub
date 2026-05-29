@@ -139,6 +139,9 @@ def remover_notas():
 def parecer_aluno():
     ...
 
+def buscar_aluno():
+    ...
+
 #menus
 def menu_aluno(): #COMPLETO (revisar todos os comandos no fim)
     while True:
@@ -185,10 +188,11 @@ def menu_secretario(): #COMPLETO (revisar todos os comandos no fim)
         print("2 - Remover Aluno")
         print("3 - Cadastrar Professor")
         print("4 - Remover Professor")
-        print("5  - Cadastrar Turma")
+        print("5 - Cadastrar Turma")
         print("6 - Remover Turma")
         print("7 - Editar Dados dos Aluno")
         print("8 - Editar Dados do Professor")
+        print("9 - Buscar Aluno")
         print("0 - Sair do Sistema ")
         actSecre = input("\nO que você deseja fazer: ")
 
@@ -208,6 +212,8 @@ def menu_secretario(): #COMPLETO (revisar todos os comandos no fim)
             return editar_aluno()
         elif actSecre == "8":
             return editar_prof()
+        elif actSecre == "9":
+            return buscar_aluno()
         elif actSecre == "0":
             print("\nVocê saiu do Sistema Instituto D'Souza. Encerando serviços...")
             break
