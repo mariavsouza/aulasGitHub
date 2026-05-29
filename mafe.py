@@ -24,19 +24,75 @@ def criar_conexao():
     
 #validações
 def validar_nome():
-    ...
+   if not nome.strip():
+        print("O nome não pode estar vazio.")
+        return False
+ 
+    if not all(parte.isalpha() for parte in nome.replace(" ", "").split()):
+        print("O nome deve conter apenas letras.")
+        return False
+ 
+    return True
 
 def validar_nascimento():
-    ...
+        try:
+        data = datetime.strptime(data_nascimento, "%d/%m/%Y")
+ 
+        if data > datetime.now():
+            print("A data de nascimento não pode ser futura.")
+            return False
+ 
+        return True
+ 
+    except ValueError:
+        print("Formato inválido. Use DD/MM/AAAA.")
+        return False
+ 
 
 def validar_turma():
-    ...
+        if not turma.strip():
+        print("A turma não pode estar vazia.")
 
-def validar_notsa():
-    ...
+        return False
+ 
+    return True
+
+def validar_notas():
+    if not isinstance(notas, list):
+        print("As notas devem ser uma lista.")
+        return False
+ 
+    for nota in notas:
+        if not isinstance(nota, (int, float)):
+            print("Todas as notas devem ser numéricas.")
+            return False
+ 
+        if nota < 0 or nota > 10:
+            print("As notas devem estar entre 0 e 10.")
+            return False
+ 
+    return True
 
 def validar_materia():
-    ...
+materias = {
+    "1A": ["Matemática", "Português", "História"],
+    "2A": ["Física", "Química", "Biologia"]
+}
+
+def validar_materia(turma, materia):
+
+    if turma not in materias:
+        return "Turma não encontrada"
+
+    if materia in materias[turma]:
+        return "Matéria válida"
+    else:
+        return "Matéria inválida"
+
+
+print(validar_materia("1A", "Matemática"))
+print(validar_materia("1A", "Biologia"))
+print(validar_materia("3A", "Português"))
 
 #funções
 def cadastrar_aluno():
@@ -121,7 +177,7 @@ def menu_secretario():
         actSecre = input("\nO que você deseja fazer: ")
 
         if actSecre == "1":
-            ...
+            return cadastrar_aluno()
         elif actSecre == "2":
             ...
         elif actSecre == "3":
