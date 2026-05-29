@@ -41,32 +41,23 @@ def validar_materia():
 #funções
 def cadastrar_aluno():
     nome = input("Nome do aluno: ")
-    if not validar_nome():
-            return 
-        
+    
     data_nascimento = input("Data de Nascimento: ")
-    if not validar_nascimento():
-            return 
 
     turma = input("Turma: ")
-    if not validar_turma():
-            return 
 
     dados = [nome, data_nascimento, turma, notas]
     alunos.append(dados)
+    print("Aluno Cadastrado!")
 
 def cadastrar_prof():
     nome = input("Nome do Professor: ")
-    if not validar_nome():
-            return 
 
     materia = input("Matéria Lecionada: ")
-    if not validar_materia():
-            return 
 
     dadosprof = [nome, materia]
     professores.append(dadosprof)
-
+    print("Professor Cadastrado!")
 #menus
 def menu_aluno():
     while True:
@@ -121,7 +112,7 @@ def menu_secretario():
         actSecre = input("\nO que você deseja fazer: ")
 
         if actSecre == "1":
-            ...
+            return cadastrar_aluno()
         elif actSecre == "2":
             ...
         elif actSecre == "3":
