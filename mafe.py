@@ -1,11 +1,13 @@
 #importações de recursos externos
 import mysql.connector
 from mysql.connector import Error
+from datetime import datetime
 
 #listas pré estabelecidas
 alunos = []
 professores = []
 notas = []
+materias = []
 
 #conexão com mySQL (sem conexão nas defs ainda)
 def criar_conexao():
@@ -23,8 +25,8 @@ def criar_conexao():
         return None
     
 #validações
-def validar_nome():
-   if not nome.strip():
+def validar_nome(nome):
+    if not nome.strip():
         print("O nome não pode estar vazio.")
         return False
  
@@ -34,8 +36,8 @@ def validar_nome():
  
     return True
 
-def validar_nascimento():
-        try:
+def validar_nascimento(data_nascimento):
+    try:
         data = datetime.strptime(data_nascimento, "%d/%m/%Y")
  
         if data > datetime.now():
@@ -47,15 +49,10 @@ def validar_nascimento():
     except ValueError:
         print("Formato inválido. Use DD/MM/AAAA.")
         return False
- 
 
-def validar_turma():
-        if not turma.strip():
+def validar_turma(turma):
+    if not turma.strip():
         print("A turma não pode estar vazia.")
-
-        return False
- 
-    return True
 
 def validar_notas():
     if not isinstance(notas, list):
@@ -73,14 +70,15 @@ def validar_notas():
  
     return True
 
-def validar_materia():
-materias = {
-    "1A": ["Matemática", "Português", "História"],
-    "2A": ["Física", "Química", "Biologia"]
-}
-
 def validar_materia(turma, materia):
-
+    if not materia.strip():
+        print("O nome não pode estar vazio.")
+        return False
+ 
+    if not all(parte.isalpha() for parte in materia.replace(" ", "").split()):
+        print("O nome deve conter apenas letras.")
+        return False
+    
     if turma not in materias:
         return "Turma não encontrada"
 
@@ -88,11 +86,6 @@ def validar_materia(turma, materia):
         return "Matéria válida"
     else:
         return "Matéria inválida"
-
-
-print(validar_materia("1A", "Matemática"))
-print(validar_materia("1A", "Biologia"))
-print(validar_materia("3A", "Português"))
 
 #funções
 def cadastrar_aluno():
@@ -114,8 +107,39 @@ def cadastrar_prof():
     dadosprof = [nome, materia]
     professores.append(dadosprof)
     print("Professor Cadastrado!")
+
+def cadastrar_turma():
+    ...
+
+def editar_aluno():
+    ...
+
+def editar_prof():
+    ...
+
+def remover_aluno():
+    ...
+
+def remover_prof():
+    ...
+
+def remover_turma():
+    ...
+
+def adicionar_notas():
+    ...
+
+def editar_notas():
+    ...
+
+def remover_notas():
+    ...
+
+def parecer_aluno():
+    ...
+
 #menus
-def menu_aluno():
+def menu_aluno(): #COMPLETO (revisar todos os comandos no fim)
     while True:
         print("\n --- MENU DE AÇÕES DO ALUNO\\RESPONSÁVEL ---")
         print("1 - Visualizar parecer do aluno")
@@ -123,7 +147,7 @@ def menu_aluno():
         actAluno = input("\nO que você deseja fazer: ")
 
         if actAluno == "1":
-            ...
+            return parecer_aluno()
         elif actAluno == "0":
             print("\nVocê saiu do Sistema Instituto D'Souza. Encerando serviços...")
             break
@@ -131,7 +155,7 @@ def menu_aluno():
             print(">>ERRO<<\nEscolha uma opção válida mostrada acima!")
             continue
     
-def menu_professor():
+def menu_professor(): #COMPLETO (revisar todos os comandos no fim)
     while True:
         print("\n --- MENU DE AÇÕES DO PROFESSOR ---")
         print("1 - Adicionar Notas")
@@ -153,7 +177,7 @@ def menu_professor():
             print(">>ERRO<<\nEscolha uma opção válida mostrada acima!")
             continue
         
-def menu_secretario():
+def menu_secretario(): #COMPLETO (revisar todos os comandos no fim)
      while True:
         print("\n --- MENU DE AÇÕES DO SECRETÁRIO---")
         print("1 - Cadastrar Aluno")
@@ -190,7 +214,7 @@ def menu_secretario():
             print(">>ERRO<<\nEscolha uma opção válida mostrada acima!")
             continue
 
-def menu_inicial():
+def menu_inicial(): #COMPLETO (revisar todos os comandos no fim)
     print("\n----- Bem vindo ao sistema do Instituto D'Souza -----")
     while True:  
         print("\n --- OPÇÕES DE LOGIN ---")
