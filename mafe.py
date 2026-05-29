@@ -85,11 +85,11 @@ def menu_professor():
         actProf = input("\nO que você deseja fazer: ")
 
         if actProf == "1":
-            ...
+            return adicionar_notas()
         elif actProf == "2":
-            ...
+            return remover_notas()
         elif actProf == "3":
-            ...
+            return editar_notas()
         elif actProf == "0":
             print("\nVocê saiu do Sistema Instituto D'Souza. Encerando serviços...")
             break
@@ -114,19 +114,19 @@ def menu_secretario():
         if actSecre == "1":
             return cadastrar_aluno()
         elif actSecre == "2":
-            ...
+            return remover_aluno()
         elif actSecre == "3":
-            ...
+            return cadastrar_prof()
         elif actSecre == "4":
-            ...
+            return remover_prof()
         elif actSecre == "5":
-            ...
+            return cadastrar_turma()
         elif actSecre == "6":
-            ...
+            return remover_turma()
         elif actSecre == "7":
-            ...
+            return editar_aluno()
         elif actSecre == "8":
-            ...
+            return editar_prof()
         elif actSecre == "0":
             print("\nVocê saiu do Sistema Instituto D'Souza. Encerando serviços...")
             break
