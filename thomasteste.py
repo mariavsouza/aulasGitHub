@@ -6,11 +6,70 @@ from datetime import datetime
 #listas pré estabelecidas
 alunos = []
 professores = []
-turma = []
 notas = []
-materias = ["português", "inglês", "artes", "educação física", "matemática", "geografia", "história", "sociologia", "filosofia", "biologia", "química", "física", "projeto de vida",]
 
-#conexão com mySQL (sem conexão nas defs ainda)
+#notas exemplo
+notas_aluno = {
+    "português": 8,
+    "inglês": 7,
+    "matemática": 9
+}
+
+#matérias
+materias = {
+
+    "1EM": [
+        "português",
+        "inglês",
+        "artes",
+        "educação física",
+        "matemática",
+        "geografia",
+        "história",
+        "sociologia",
+        "filosofia",
+        "biologia",
+        "química",
+        "física",
+        "projeto de vida",
+        "informática"
+    ],
+
+    "2EM": [
+        "português",
+        "inglês",
+        "artes",
+        "educação física",
+        "matemática",
+        "geografia",
+        "história",
+        "sociologia",
+        "filosofia",
+        "biologia",
+        "química",
+        "física",
+        "projeto de vida",
+        "informática"
+    ],
+
+    "3EM": [
+        "português",
+        "inglês",
+        "artes",
+        "educação física",
+        "matemática",
+        "geografia",
+        "história",
+        "sociologia",
+        "filosofia",
+        "biologia",
+        "química",
+        "física",
+        "projeto de vida",
+        "informática"
+    ]
+}
+#conexão com mySQL
 def criar_conexao():
     try:
         conexao = mysql.connector.connect(
@@ -27,6 +86,7 @@ def criar_conexao():
     
 #validações
 def validar_nome(nome):
+
     if not nome.strip():
         print("O nome não pode estar vazio.")
         return False
@@ -39,6 +99,7 @@ def validar_nome(nome):
 
 
 def validar_nascimento(data_nascimento):
+
     try:
         data = datetime.strptime(data_nascimento, "%d/%m/%Y")
  
@@ -51,9 +112,10 @@ def validar_nascimento(data_nascimento):
     except ValueError:
         print("Formato inválido. Use DD/MM/AAAA.")
         return False
- 
+
 
 def validar_turma(turma):
+
     if not turma.strip():
         print("A turma não pode estar vazia.")
         return False
@@ -62,11 +124,13 @@ def validar_turma(turma):
 
 
 def validar_notas(notas):
+
     if not isinstance(notas, list):
         print("As notas devem ser uma lista.")
         return False
  
     for nota in notas:
+
         if not isinstance(nota, (int, float)):
             print("Todas as notas devem ser numéricas.")
             return False
@@ -78,51 +142,34 @@ def validar_notas(notas):
     return True
 
 
-materias = {
-    "1A": [
-        "português", "inglês", "artes", "educação física",
-        "matemática", "geografia", "história", "sociologia",
-        "filosofia", "biologia", "química", "física",
-        "projeto de vida"
-    ],
-
-    "2A": [
-        "português", "inglês", "artes", "educação física",
-        "matemática", "geografia", "história", "sociologia",
-        "filosofia", "biologia", "química", "física",
-        "projeto de vida"
-    ]
-}
-
-
-def mostrar_materias(turma):
+def validar_materia(turma, materia):
 
     if turma not in materias:
         print("Turma não encontrada")
-        return
+        return False
 
-    print(f"\nMatérias da turma {turma}:\n")
+    if materia not in materias[turma]:
+        print("Matéria inválida")
+        return False
 
-    for materia in materias[turma]:
-        print("-", materia)
-
-
-mostrar_materias("1A")
+    return True
 
 
+#funções
 def cadastrar_aluno():
+
     nome = input("Nome do aluno: ")
-    
+
     if not validar_nome(nome):
         return 
         
     data_nascimento = input("Data de Nascimento: ")
-    
+
     if not validar_nascimento(data_nascimento):
         return 
 
     turma = input("Turma: ")
-    
+
     if not validar_turma(turma):
         return 
 
@@ -133,8 +180,9 @@ def cadastrar_aluno():
 
 
 def cadastrar_prof():
+
     nome = input("Nome do Professor: ")
-    
+
     if not validar_nome(nome):
         return 
 
@@ -144,12 +192,12 @@ def cadastrar_prof():
         print("Turma inválida.")
         return
 
-    print("\nMatérias disponíveis:")
-    
+    print("\nMatérias disponíveis:\n")
+
     for materia in materias[turma]:
         print("-", materia)
 
-    materia = input("\nEscolha a matéria: ")
+    materia = input("\nQual matéria o professor leciona?: ")
 
     if not validar_materia(turma, materia):
         return 
@@ -159,105 +207,172 @@ def cadastrar_prof():
 
     print("Professor cadastrado com sucesso!")
 
+
 #menus
 def menu_aluno():
+
+    turma = input("\nDigite sua turma: ")
+
+    if turma not in materias:
+        print("Turma não encontrada.")
+        return
+
+    print(f"\n--- MATÉRIAS DA TURMA {turma} ---\n")
+
+    for materia in materias[turma]:
+
+        nota = notas_aluno.get(materia, "Sem nota")
+
+        print(f"{materia} --> Nota: {nota}")
+
     while True:
+
         print("\n --- MENU DE AÇÕES DO ALUNO\\RESPONSÁVEL ---")
         print("1 - Visualizar parecer do aluno")
         print("0 - Sair do Sistema")
+
         actAluno = input("\nO que você deseja fazer: ")
 
         if actAluno == "1":
             ...
+
         elif actAluno == "0":
             print("\nVocê saiu do Sistema Instituto D'Souza. Encerando serviços...")
             break
+
         else:
             print(">>ERRO<<\nEscolha uma opção válida mostrada acima!")
             continue
     
+
 def menu_professor():
+
+    turma = input("\nDigite a turma: ")
+
+    if turma not in materias:
+        print("Turma não encontrada.")
+        return
+
+    print(f"\n--- MATÉRIAS DA TURMA {turma} ---\n")
+
+    for materia in materias[turma]:
+        print("-", materia)
+
+    escolha = input("\nQual matéria o professor leciona?: ")
+
+    if escolha not in materias[turma]:
+        print("Matéria inválida.")
+        return
+
+    print(f"\nProfessor selecionou a matéria: {escolha}")
+
     while True:
+
         print("\n --- MENU DE AÇÕES DO PROFESSOR ---")
         print("1 - Adicionar Notas")
         print("2 - Remover Notas")
         print("3 - Editar Notas")
         print("0 - Sair do Sistema ")
+
         actProf = input("\nO que você deseja fazer: ")
 
         if actProf == "1":
             ...
+
         elif actProf == "2":
             ...
+
         elif actProf == "3":
             ...
+
         elif actProf == "0":
             print("\nVocê saiu do Sistema Instituto D'Souza. Encerando serviços...")
             break
+
         else:
             print(">>ERRO<<\nEscolha uma opção válida mostrada acima!")
             continue
         
+
 def menu_secretario():
-     while True:
+
+    while True:
+
         print("\n --- MENU DE AÇÕES DO SECRETÁRIO---")
         print("1 - Cadastrar Aluno")
         print("2 - Remover Aluno")
         print("3 - Cadastrar Professor")
         print("4 - Remover Professor")
-        print("5  - Cadastrar Turma")
+        print("5 - Cadastrar Turma")
         print("6 - Remover Turma")
         print("7 - Editar Dados dos Aluno")
         print("8 - Editar Dados do Professor")
         print("0 - Sair do Sistema ")
+
         actSecre = input("\nO que você deseja fazer: ")
 
         if actSecre == "1":
-            return cadastrar_aluno()
+            cadastrar_aluno()
+
         elif actSecre == "2":
             ...
+
         elif actSecre == "3":
-            return cadastrar_prof()
+            cadastrar_prof()
+
         elif actSecre == "4":
             ...
+
         elif actSecre == "5":
             ...
+
         elif actSecre == "6":
             ...
+
         elif actSecre == "7":
             ...
+
         elif actSecre == "8":
             ...
+
         elif actSecre == "0":
             print("\nVocê saiu do Sistema Instituto D'Souza. Encerando serviços...")
             break
+
         else:
             print(">>ERRO<<\nEscolha uma opção válida mostrada acima!")
             continue
 
+
 def menu_inicial():
+
     print("\n----- Bem vindo ao sistema do Instituto D'Souza -----")
-    
-    while True:  
+
+    while True:
+
         print("\n --- OPÇÕES DE LOGIN ---")
         print("1 - Aluno\\Responsável")
         print("2 - Professor(a)")
         print("3 - Secretário")
         print("0 - Sair do Sistema")
-        
+
         login = input("\nQual a sua forma de login?: ")
 
         if login == "1":
-            return menu_aluno()
+            menu_aluno()
+
         elif login == "2":
-            return menu_professor()
+            menu_professor()
+
         elif login == "3":
-            return menu_secretario()
+            menu_secretario()
+
         elif login == "0":
             print("\nVocê saiu do Sistema Instituto D'Souza. Encerando serviços...")
             break
+
         else:
             print(">>ERRO<<\nEscolha uma opção válida mostrada acima!")
-            return
+
 
 menu_inicial()
