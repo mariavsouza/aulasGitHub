@@ -179,6 +179,7 @@ def cadastrar_aluno():
     print("Aluno cadastrado com sucesso!")
 
 
+#função cadastrar professor
 def cadastrar_prof():
 
     nome = input("Nome do Professor: ")
@@ -192,20 +193,24 @@ def cadastrar_prof():
         print("Turma inválida.")
         return
 
-    print("\nMatérias disponíveis:\n")
+    print("\n--- MATÉRIAS DISPONÍVEIS ---\n")
 
-    for materia in materias[turma]:
-        print("-", materia)
+    for i, materia in enumerate(materias[turma], start=1):
+        print(f"{i} - {materia}")
 
-    materia = input("\nQual matéria o professor leciona?: ")
+    try:
+        escolha = int(input("\nEscolha o número da matéria: "))
 
-    if not validar_materia(turma, materia):
-        return 
+        materia_escolhida = materias[turma][escolha - 1]
 
-    dadosprof = [nome, materia]
+    except:
+        print("Opção inválida.")
+        return
+
+    dadosprof = [nome, turma, materia_escolhida]
     professores.append(dadosprof)
 
-    print("Professor cadastrado com sucesso!")
+    print(f"\nProfessor cadastrado na matéria {materia_escolhida}!")
 
 
 #menus
