@@ -186,7 +186,7 @@ def cadastrar_prof():
     if not validar_nome(nome):
         return 
 
-    turma = input("Turma: ")
+    turma= input("Turma: ").upper()
 
     if turma not in materias:
         print("Turma inválida.")
@@ -197,7 +197,7 @@ def cadastrar_prof():
     for materia in materias[turma]:
         print("-", materia)
 
-    materia = input("\nQual matéria o professor leciona?: ")
+    materia = input("\nQual matéria o professor leciona?: ").lower()
 
     if not validar_materia(turma, materia):
         return 

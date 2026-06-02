@@ -3,12 +3,16 @@ import mysql.connector
 from mysql.connector import Error
 from datetime import datetime
 
-#listas pré estabelecidas
+#listas pré estabelecidas | colocar as materias em determinadas turmas
 alunos = []
 professores = []
 turma = []
 notas = []
-materias = ["português", "inglês", "artes", "educação física", "matemática", "geografia", "história", "sociologia", "filosofia", "biologia", "química", "física", "projeto de vida",]
+materias = ["português", "inglês", "artes", 
+            "educação física", "matemática", "geografia", 
+            "história", "sociologia", "filosofia", "biologia", 
+            "química", "física", "projeto de vida",]
+
 
 #conexão com mySQL (sem conexão nas defs ainda)
 def criar_conexao():
@@ -77,24 +81,10 @@ def validar_notas(notas):
  
     return True
 
+def validar_materia():
+    ...
 
-materias = {
-    "1A": [
-        "português", "inglês", "artes", "educação física",
-        "matemática", "geografia", "história", "sociologia",
-        "filosofia", "biologia", "química", "física",
-        "projeto de vida"
-    ],
-
-    "2A": [
-        "português", "inglês", "artes", "educação física",
-        "matemática", "geografia", "história", "sociologia",
-        "filosofia", "biologia", "química", "física",
-        "projeto de vida"
-    ]
-}
-
-
+#defs funções
 def mostrar_materias(turma):
 
     if turma not in materias:
@@ -108,7 +98,6 @@ def mostrar_materias(turma):
 
 
 mostrar_materias("1A")
-
 
 def cadastrar_aluno():
     nome = input("Nome do aluno: ")
@@ -159,7 +148,38 @@ def cadastrar_prof():
 
     print("Professor cadastrado com sucesso!")
 
-#menus
+
+def cadastrar_turma():
+    ...
+
+def adicionar_nota():
+    ...
+
+def editar_nota():
+    ...
+
+def editar_alunos():
+    ...
+
+def editar_prof():
+    ...
+
+def remover_nota():
+    ...
+
+def remover_aluno():
+    ...
+
+def remover_prof():
+    ...
+
+def remover_turma():
+    ...
+
+def parecer_aluno():
+    ...
+
+#menus #COMPLETOS
 def menu_aluno():
     while True:
         print("\n --- MENU DE AÇÕES DO ALUNO\\RESPONSÁVEL ---")
@@ -168,7 +188,7 @@ def menu_aluno():
         actAluno = input("\nO que você deseja fazer: ")
 
         if actAluno == "1":
-            ...
+            return parecer_aluno()
         elif actAluno == "0":
             print("\nVocê saiu do Sistema Instituto D'Souza. Encerando serviços...")
             break
@@ -186,11 +206,11 @@ def menu_professor():
         actProf = input("\nO que você deseja fazer: ")
 
         if actProf == "1":
-            ...
+            return adicionar_nota()
         elif actProf == "2":
-            ...
+            return remover_nota()
         elif actProf == "3":
-            ...
+            return editar_nota()
         elif actProf == "0":
             print("\nVocê saiu do Sistema Instituto D'Souza. Encerando serviços...")
             break
@@ -215,19 +235,19 @@ def menu_secretario():
         if actSecre == "1":
             return cadastrar_aluno()
         elif actSecre == "2":
-            ...
+            return remover_aluno()
         elif actSecre == "3":
             return cadastrar_prof()
         elif actSecre == "4":
-            ...
+            return remover_prof()
         elif actSecre == "5":
-            ...
+            return cadastrar_turma()
         elif actSecre == "6":
-            ...
+            return remover_turma()
         elif actSecre == "7":
-            ...
+            return editar_alunos()
         elif actSecre == "8":
-            ...
+            return editar_prof()
         elif actSecre == "0":
             print("\nVocê saiu do Sistema Instituto D'Souza. Encerando serviços...")
             break
