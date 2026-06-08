@@ -150,53 +150,29 @@ def listar_aluno():
         for i, aluno in enumerate(alunos, start=1):
             print(f"Aluno {i}: Nome: {aluno[0]}; Data de nascimento: {aluno[1]}; Turma: {aluno[2]}.")
 
-def remover_aluno():
-    ...
+def remover_aluno(id_aluno):
+    for aluno in alunos:
+        if aluno["id"] == id_aluno:
+            alunos.remove(aluno)
+            print(f"Aluno {id_aluno} removido com sucesso.")
+            return
+    print(f"Aluno {id_aluno} não encontrado.")
 
-def editar_dados():
-    ...
+def remover_professor(id_professor):
+    for professor in professor:
+        if professor["id"] == id_professor:
+            professor.remove(professor)
+            print(f"Professor {id_professor} removido com sucesso.")
+            return
+    print(f"Professor {id_professor} não encontrado.")
 
-def adicionar_notas():
-    
-    if not alunos:
-        print("Nenhum aluno cadastrado no sistema.")
-        return
-
-    print("\n--- Lista de Alunos ---")
-    for i, aluno in enumerate(alunos, start=1):
-        print(f"Aluno {i}: Nome: {aluno[0]}; Data de nascimento: {aluno[1]}; Turma: {aluno[2]}")
-    id_aluno = int(input("Digite o ID do aluno que você quer adicionar uma nota: "))
-
-    if id_aluno < 1 or id_aluno > len(alunos):
-        print("Aluno não encontrado.")
-
-    entrada = float(input("Digite a nota: "))
-    indice_real = id_aluno - 1
-    alunos[indice_real][3].append(entrada)
-    
-
-    print("Nota adicionada!")
-
-def remover_notas():
-    ...
-
-def caucular_media():
-    notas.append()
-    while True:
-        entrada = float(input("Digite uma nota (ou -1 para calcular a média): "))
-        
-        if entrada == -1:
-            break  
-            
-        else:
-            notas.append(entrada)
-
-    if len(notas) > 0:
-        media = sum(notas) / len(notas)
-        print(f"\nVocê digitou {len(notas)} notas.")
-        print(f"A média final é: {media:.2f}")
-    else:
-        print("Nenhuma nota foi registrada.")
+def remover_turma(id_turma):
+    for turma in turma:
+        if turma["id"] == id_turma:
+            turma.remove(turma)
+            print(f"Turma {id_turma} removida com sucesso.")
+            return
+    print(f"Turma {id_turma} não encontrada.")
 
 def buscar_aluno():
     ...
