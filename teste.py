@@ -2,6 +2,9 @@ from sql import *
 from funcoes import *
 from validacoes import *
 
+def cadastrar_aluno():
+    ...
+
 def menu():
     while True:
         print("\n --- MENU ---")

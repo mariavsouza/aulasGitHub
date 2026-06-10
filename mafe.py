@@ -81,8 +81,17 @@ def validar_notas(notas):
  
     return True
 
-def validar_materia():
-    ...
+def validar_materia(turma, materia):
+
+    if turma not in materias:
+        print("Turma não encontrada.")
+        return False
+
+    if materia.lower() not in materias[turma]:
+        print("Matéria inválida.")
+        return False
+
+    return True
 
 #defs funções
 def mostrar_materias(turma):
@@ -150,34 +159,210 @@ def cadastrar_prof():
 
 
 def cadastrar_turma():
-    ...
+    
+    nome_turma = input("Digite o nome da turma: ")
+
+    if nome_turma in materias:
+        print("Turma já cadastrada.")
+        return
+
+    materias[nome_turma] = materias.copy()
+
+    print("Turma cadastrada com sucesso!")
 
 def adicionar_nota():
-    ...
+    nome = input("Nome do aluno: ")
+
+    for aluno in alunos:
+
+        if aluno["nome"].lower() == nome.lower():
+
+            materia = input("Matéria: ").lower()
+
+            nota = float(input("Nota: "))
+
+            aluno["notas"][materia] = nota
+
+            print("Nota adicionada!")
+            return
+
+    print("Aluno não encontrado.")
 
 def editar_nota():
-    ...
+
+    nome = input("Nome do aluno: ")
+
+    for aluno in alunos:
+
+        if aluno["nome"].lower() == nome.lower():
+
+            materia = input("Matéria: ").lower()
+
+            if materia in aluno["notas"]:
+
+                nova_nota = float(input("Nova nota: "))
+
+                aluno["notas"][materia] = nova_nota
+
+                print("Nota atualizada!")
+
+            else:
+                print("Matéria não encontrada.")
+
+            return
+
+    print("Aluno não encontrado.")
 
 def editar_alunos():
-    ...
+
+    nome = input("Nome do aluno: ")
+
+    for aluno in alunos:
+
+        if aluno["nome"].lower() == nome.lower():
+
+            print("1 - Nome")
+            print("2 - Data de Nascimento")
+            print("3 - Turma")
+
+            opcao = input("Escolha: ")
+
+            if opcao == "1":
+                aluno["nome"] = input("Novo nome: ")
+
+            elif opcao == "2":
+                aluno["nascimento"] = input("Nova data: ")
+
+            elif opcao == "3":
+                aluno["turma"] = input("Nova turma: ")
+
+            print("Aluno atualizado!")
+            return
+
+    print("Aluno não encontrado.")
 
 def editar_prof():
-    ...
+
+    nome = input("Nome do professor: ")
+
+    for professor in professores:
+
+        if professor["nome"].lower() == nome.lower():
+
+            print("1 - Nome")
+            print("2 - Turma")
+            print("3 - Matéria")
+
+            opcao = input("Escolha: ")
+
+            if opcao == "1":
+                professor["nome"] = input("Novo nome: ")
+
+            elif opcao == "2":
+                professor["turma"] = input("Nova turma: ")
+
+            elif opcao == "3":
+                professor["materia"] = input("Nova matéria: ")
+
+            print("Professor atualizado!")
+            return
+
+    print("Professor não encontrado.")
 
 def remover_nota():
-    ...
+
+    nome = input("Nome do aluno: ")
+
+    for aluno in alunos:
+
+        if aluno["nome"].lower() == nome.lower():
+
+            materia = input("Matéria: ").lower()
+
+            if materia in aluno["notas"]:
+
+                del aluno["notas"][materia]
+
+                print("Nota removida!")
+
+            else:
+                print("Matéria não encontrada.")
+
+            return
+
+    print("Aluno não encontrado.")
 
 def remover_aluno():
-    ...
+
+    nome = input("Nome do aluno: ")
+
+    for aluno in alunos:
+
+        if aluno["nome"].lower() == nome.lower():
+
+            alunos.remove(aluno)
+
+            print("Aluno removido!")
+            return
+
+    print("Aluno não encontrado.")
 
 def remover_prof():
-    ...
+
+    nome = input("Nome do professor: ")
+
+    for professor in professores:
+
+        if professor["nome"].lower() == nome.lower():
+
+            professores.remove(professor)
+
+            print("Professor removido!")
+            return
+
+    print("Professor não encontrado.")
 
 def remover_turma():
-    ...
+
+    nome_turma = input("Nome da turma: ")
+
+    if nome_turma in materias:
+
+        del materias[nome_turma]
+
+        print("Turma removida!")
+
+    else:
+        print("Turma não encontrada.")
 
 def parecer_aluno():
-    ...
+
+    nome = input("Nome do aluno: ")
+
+    for aluno in alunos:
+
+        if aluno["nome"].lower() == nome.lower():
+
+            if len(aluno["notas"]) == 0:
+                print("Aluno sem notas.")
+                return
+
+            media = sum(aluno["notas"].values()) / len(aluno["notas"])
+
+            print(f"Média: {media:.1f}")
+
+            if media >= 7:
+                print("APROVADO")
+
+            elif media >= 5:
+                print("RECUPERAÇÃO")
+
+            else:
+                print("REPROVADO")
+
+            return
+
+    print("Aluno não encontrado.")
 
 #menus #COMPLETOS
 def menu_aluno():
