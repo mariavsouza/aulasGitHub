@@ -6,12 +6,26 @@ from datetime import datetime
 #listas pré estabelecidas | colocar as materias em determinadas turmas
 alunos = []
 professores = []
-turma = []
-notas = []
-materias = ["português", "inglês", "artes", 
-            "educação física", "matemática", "geografia", 
-            "história", "sociologia", "filosofia", "biologia", 
-            "química", "física", "projeto de vida",]
+materias = {
+    "1EM": [
+        "português", "inglês", "artes", "educação física",
+        "matemática", "geografia", "história", "sociologia",
+        "filosofia", "biologia", "química", "física",
+        "projeto de vida"
+    ],
+    "2EM": [
+        "português", "inglês", "artes", "educação física",
+        "matemática", "geografia", "história", "sociologia",
+        "filosofia", "biologia", "química", "física",
+        "projeto de vida"
+    ],
+    "3EM": [
+        "português", "inglês", "artes", "educação física",
+        "matemática", "geografia", "história", "sociologia",
+        "filosofia", "biologia", "química", "física",
+        "projeto de vida"
+    ]
+}
 
 
 #conexão com mySQL (sem conexão nas defs ainda)
@@ -105,72 +119,97 @@ def mostrar_materias(turma):
     for materia in materias[turma]:
         print("-", materia)
 
-
-mostrar_materias("1A")
-
 def cadastrar_aluno():
+
     nome = input("Nome do aluno: ")
-    
+
     if not validar_nome(nome):
-        return 
-        
+        return
+
     data_nascimento = input("Data de Nascimento: ")
-    
+
     if not validar_nascimento(data_nascimento):
-        return 
+        return
 
-    turma = input("Turma: ")
-    
-    if not validar_turma(turma):
-        return 
+    turma = input("Turma (1EM, 2EM ou 3EM): ")
 
-    dados = [nome, data_nascimento, turma, notas]
-    alunos.append(dados)
+    if turma not in materias:
+        print("Turma inválida.")
+        return
+
+    aluno = {
+        "nome": nome,
+        "nascimento": data_nascimento,
+        "turma": turma,
+        "notas": {}
+    }
+
+    alunos.append(aluno)
 
     print("Aluno cadastrado com sucesso!")
 
-
 def cadastrar_prof():
-    nome = input("Nome do Professor: ")
-    
-    if not validar_nome(nome):
-        return 
 
-    turma = input("Turma: ")
+    nome = input("Nome do Professor: ")
+
+    if not validar_nome(nome):
+        return
+
+    turma = input("Turma (1EM, 2EM ou 3EM): ")
 
     if turma not in materias:
         print("Turma inválida.")
         return
 
     print("\nMatérias disponíveis:")
-    
+
     for materia in materias[turma]:
         print("-", materia)
 
-    materia = input("\nEscolha a matéria: ")
+    materia = input("\nEscolha a matéria: ").lower()
 
-    if not validar_materia(turma, materia):
-        return 
+    if materia not in materias[turma]:
+        print("Matéria inválida.")
+        return
 
-    dadosprof = [nome, materia]
-    professores.append(dadosprof)
+    professor = {
+        "nome": nome,
+        "turma": turma,
+        "materia": materia
+    }
+
+    professores.append(professor)
 
     print("Professor cadastrado com sucesso!")
 
-
 def cadastrar_turma():
-    
+
     nome_turma = input("Digite o nome da turma: ")
 
     if nome_turma in materias:
         print("Turma já cadastrada.")
         return
 
-    materias[nome_turma] = materias.copy()
+    materias[nome_turma] = [
+        "português",
+        "inglês",
+        "artes",
+        "educação física",
+        "matemática",
+        "geografia",
+        "história",
+        "sociologia",
+        "filosofia",
+        "biologia",
+        "química",
+        "física",
+        "projeto de vida"
+    ]
 
     print("Turma cadastrada com sucesso!")
 
 def adicionar_nota():
+
     nome = input("Nome do aluno: ")
 
     for aluno in alunos:
@@ -179,11 +218,18 @@ def adicionar_nota():
 
             materia = input("Matéria: ").lower()
 
+            if not validar_materia(aluno["turma"], materia):
+                return
+
             nota = float(input("Nota: "))
+
+            if nota < 0 or nota > 10:
+                print("Nota inválida.")
+                return
 
             aluno["notas"][materia] = nota
 
-            print("Nota adicionada!")
+            print("Nota adicionada com sucesso!")
             return
 
     print("Aluno não encontrado.")
@@ -373,7 +419,7 @@ def menu_aluno():
         actAluno = input("\nO que você deseja fazer: ")
 
         if actAluno == "1":
-            return parecer_aluno()
+            parecer_aluno()
         elif actAluno == "0":
             print("\nVocê saiu do Sistema Instituto D'Souza. Encerando serviços...")
             break
@@ -418,21 +464,21 @@ def menu_secretario():
         actSecre = input("\nO que você deseja fazer: ")
 
         if actSecre == "1":
-            return cadastrar_aluno()
+            cadastrar_aluno()
         elif actSecre == "2":
-            return remover_aluno()
+            remover_aluno()
         elif actSecre == "3":
-            return cadastrar_prof()
+            cadastrar_prof()
         elif actSecre == "4":
-            return remover_prof()
+            remover_prof()
         elif actSecre == "5":
-            return cadastrar_turma()
+            cadastrar_turma()
         elif actSecre == "6":
-            return remover_turma()
+            remover_turma()
         elif actSecre == "7":
-            return editar_alunos()
+            editar_alunos()
         elif actSecre == "8":
-            return editar_prof()
+            editar_prof()
         elif actSecre == "0":
             print("\nVocê saiu do Sistema Instituto D'Souza. Encerando serviços...")
             break
@@ -457,7 +503,7 @@ def menu_inicial():
         elif login == "2":
             return menu_professor()
         elif login == "3":
-            return menu_secretario()
+            return menu_secretario()       
         elif login == "0":
             print("\nVocê saiu do Sistema Instituto D'Souza. Encerando serviços...")
             break
