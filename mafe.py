@@ -2,6 +2,8 @@
 import mysql.connector
 from mysql.connector import Error
 from datetime import datetime
+from colorama import Fore, init
+init()
 
 #listas pré estabelecidas | colocar as materias em determinadas turmas
 alunos = []
@@ -26,7 +28,6 @@ materias = {
         "projeto de vida"
     ]
 }
-
 
 #conexão com mySQL (sem conexão nas defs ainda)
 def criar_conexao():
@@ -398,15 +399,14 @@ def parecer_aluno():
             print(f"Média: {media:.1f}")
 
             if media >= 7:
-                print("APROVADO")
-
+                return f"{Fore.GREEN}Aprovado{Fore.RESET}"
+            
             elif media >= 5:
-                print("RECUPERAÇÃO")
-
+                return f"{Fore.YELLOW}Em Recuperação{Fore.RESET}"
+            
             else:
-                print("REPROVADO")
-
-            return
+                return f"{Fore.RED}Em Recuperação{Fore.RESET}"
+            
 
     print("Aluno não encontrado.")
 
