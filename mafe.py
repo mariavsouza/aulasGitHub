@@ -3,7 +3,7 @@ import mysql.connector
 from mysql.connector import Error
 from datetime import datetime
 from colorama import Fore, init
-init 
+init()
 #listas pré estabelecidas | colocar as materias em determinadas turmas
 alunos = []
 professores = []
@@ -50,11 +50,9 @@ def validar_nome(nome):
         print("O nome não pode estar vazio.")
         return False
  
-    if not all(parte.isalpha() for parte in nome.replace(" ", "").split()):
-        print("O nome deve conter apenas letras.")
-        return False
- 
-    return True
+    all(parte.isalpha() for parte in nome.split())        
+    print("O nome deve conter apenas letras.")
+    return False
 
 
 def validar_nascimento(data_nascimento):
@@ -438,11 +436,11 @@ def menu_professor():
         actProf = input("\nO que você deseja fazer: ")
 
         if actProf == "1":
-            return adicionar_nota()
+            adicionar_nota()
         elif actProf == "2":
-            return remover_nota()
+            remover_nota()
         elif actProf == "3":
-            return editar_nota()
+            editar_nota()
         elif actProf == "0":
             print("\nVocê saiu do Sistema Instituto D'Souza. Encerando serviços...")
             break
