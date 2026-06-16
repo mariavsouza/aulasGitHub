@@ -220,16 +220,20 @@ def adicionar_nota():
             if not validar_materia(aluno["turma"], materia):
                 return
 
+        try:
             nota = float(input("Nota: "))
-
-            if nota < 0 or nota > 10:
+        except ValueError:
+            print("Nota inválida.")
+            return
+        
+        if nota < 0 or nota > 10:
                 print("Nota inválida.")
                 return
 
-            aluno["notas"][materia] = nota
+        aluno["notas"][materia] = nota
 
-            print("Nota adicionada com sucesso!")
-            return
+        print("Nota adicionada com sucesso!")
+    return
 
     print("Aluno não encontrado.")
 
