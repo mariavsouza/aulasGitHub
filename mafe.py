@@ -418,11 +418,14 @@ def menu_aluno():
     while True:
         print("\n --- MENU DE AÇÕES DO ALUNO\\RESPONSÁVEL ---")
         print("1 - Visualizar parecer do aluno")
+        print("2 - Trocar Forma de Login")
         print("0 - Sair do Sistema")
         actAluno = input("\nO que você deseja fazer: ")
 
         if actAluno == "1":
             parecer_aluno()
+        elif actAluno == "2":
+            menu_inicial()
         elif actAluno == "0":
             print("\nVocê saiu do Sistema Instituto D'Souza. Encerando serviços...")
             break
@@ -432,10 +435,19 @@ def menu_aluno():
     
 def menu_professor():
     while True:
+        professor = input("Digite seu nome:")
+
+        if professor in professores:
+            continue
+        else: 
+            print("Usuário não encontrado!")
+            exit
+
         print("\n --- MENU DE AÇÕES DO PROFESSOR ---")
         print("1 - Adicionar Notas")
         print("2 - Remover Notas")
         print("3 - Editar Notas")
+        print("4 - Trocar Forma de Login")
         print("0 - Sair do Sistema ")
         actProf = input("\nO que você deseja fazer: ")
 
@@ -445,6 +457,8 @@ def menu_professor():
             remover_nota()
         elif actProf == "3":
             editar_nota()
+        elif actProf == "4":
+            menu_inicial()
         elif actProf == "0":
             print("\nVocê saiu do Sistema Instituto D'Souza. Encerando serviços...")
             break
@@ -463,6 +477,7 @@ def menu_secretario():
         print("6 - Remover Turma")
         print("7 - Editar Dados dos Aluno")
         print("8 - Editar Dados do Professor")
+        print("9 - Trocar Forma de Login")
         print("0 - Sair do Sistema ")
         actSecre = input("\nO que você deseja fazer: ")
 
@@ -482,6 +497,8 @@ def menu_secretario():
             editar_alunos()
         elif actSecre == "8":
             editar_prof()
+        elif actSecre == "9":
+            menu_inicial()
         elif actSecre == "0":
             print("\nVocê saiu do Sistema Instituto D'Souza. Encerando serviços...")
             break
@@ -490,8 +507,6 @@ def menu_secretario():
             continue
 
 def menu_inicial():
-    print("\n----- Bem vindo ao sistema do Instituto D'Souza -----")
-    
     while True:  
         print("\n --- OPÇÕES DE LOGIN ---")
         print("1 - Aluno\\Responsável")
@@ -514,4 +529,5 @@ def menu_inicial():
             print(">>ERRO<<\nEscolha uma opção válida mostrada acima!")
             return
 
+print("\n----- Bem vindo ao sistema do Instituto D'Souza -----")
 menu_inicial()
