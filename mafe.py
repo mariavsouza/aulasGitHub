@@ -46,14 +46,16 @@ def criar_conexao():
     
 #validações
 def validar_nome(nome):
+
     if not nome.strip():
         print("O nome não pode estar vazio.")
         return False
- 
-    all(parte.isalpha() for parte in nome.split())        
-    print("O nome deve conter apenas letras.")
-    return False
 
+    if not all(parte.isalpha() for parte in nome.split()):
+        print("O nome deve conter apenas letras.")
+        return False
+
+    return True
 
 def validar_nascimento(data_nascimento):
     try:
